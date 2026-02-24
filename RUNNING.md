@@ -13,32 +13,39 @@ You need a MySQL database running.
   ```
 - **Note**: Ensure the credentials in [DBConnection.java](file:///c:/Users/outward_tech01/OneDrive/Desktop/javaApp/javaTeT/dao/DBConnection.java) match your MySQL username and password.
 
-## 2. Dependencies
+## 2. Seed Sample Data (Optional)
 
-You will need the **MySQL Connector/J** JAR file.
+If you want to quickly populate the database with sample products via Java:
 
-- Download it from the [official MySQL website](https://dev.mysql.com/downloads/connector/j/).
-- Place the `.jar` file in the root of the project folder (`javaTeT/`).
-
-## 3. Compilation
-
-Compile all the Java files from the project root:
-
-```bash
-javac -d . *.java dao/*.java model/*.java service/*.java ui/*.java
+```powershell
+# FOR POWERSHELL: Use quotes around the classpath
+java -cp ".;mysql-connector-java-8.1.0.jar" util.DataSeeder
 ```
 
-## 4. Execution
+## 3. Dependencies
 
-Run the application using the following command (replace `mysql-connector-java.jar` with your actual filename):
+You **MUST** have the MySQL Connector JAR in your project folder.
 
-```bash
-java -cp ".;mysql-connector-java.jar" Main
+1. Download `mysql-connector-j-8.x.x.jar` from [MySQL Downloads](https://dev.mysql.com/downloads/connector/j/).
+2. Copy the `.jar` file into this folder: `c:\Users\outward_tech01\OneDrive\Desktop\javaApp\javaTeT\`
+3. **Make sure the filename in the commands below matches your JAR filename exactly.**
+
+## 4. Compilation
+
+Compile all Java files:
+
+```powershell
+javac -d . *.java dao/*.java model/*.java service/*.java ui/*.java util/*.java
 ```
 
-## UI Features
+## 5. Execution
 
-- **Dynamic Search**: Search products in real-time by name.
-- **Modern Grid**: View products in a clean, card-based layout.
-- **Shopping Cart**: Add items to the cart and see subtotals, tax, and totals update instantly.
-- **Elite Aesthetics**: Uses a custom Slate and Indigo color palette for a premium feel.
+Run the application (ensure you use the correct JAR name):
+
+```powershell
+# FOR POWERSHELL: Use quotes around the classpath
+java -cp ".;mysql-connector-java-8.1.0.jar" Main
+```
+
+> [!TIP]
+> If your JAR is named `mysql-connector-j-8.3.0.jar`, use `java -cp ".;mysql-connector-j-8.3.0.jar" Main`.

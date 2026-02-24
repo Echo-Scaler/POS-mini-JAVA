@@ -4,13 +4,15 @@ public class Product {
     private int id;
     private String name;
     private String barcode;
+    private String category;
     private double price;
     private int quantity;
 
-    public Product(int id, String name, String barcode, double price, int quantity) {
+    public Product(int id, String name, String barcode, String category, double price, int quantity) {
         this.id = id;
         this.name = name;
         this.barcode = barcode;
+        this.category = category;
         this.price = price;
         this.quantity = quantity;
     }
@@ -37,6 +39,14 @@ public class Product {
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public double getPrice() {
