@@ -1,4 +1,4 @@
-# 🛒 Simple POS System (My First Big Project!)
+# 🛒 Simple POS System
 
 Hello! This is a Point of Sale (POS) system I built using Java and MySQL. I tried to make it look really cool and professional while keeping the code easy to understand.
 
