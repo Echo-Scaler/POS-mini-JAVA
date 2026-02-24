@@ -1,6 +1,6 @@
-package com.pos.dao;
+package dao;
 
-import com.pos.model.Product;
+import model.Product;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ public class ProductDAO {
         String sql = "INSERT INTO products(name, barcode, price, quantity) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, product.getName());
             stmt.setString(2, product.getBarcode());
@@ -28,7 +28,7 @@ public class ProductDAO {
     public Product getProductByBarcode(String barcode) {
         String sql = "SELECT * FROM products WHERE barcode = ?";
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, barcode);
             ResultSet rs = stmt.executeQuery();
@@ -39,13 +39,55 @@ public class ProductDAO {
                         rs.getString("name"),
                         rs.getString("barcode"),
                         rs.getDouble("price"),
-                        rs.getInt("quantity")
-                );
+                        rs.getInt("quantity"));
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public List<Product> getAllProducts() {
+        List<Product> products = new ArrayList<>();
+        String sql = "SELECT * FROM products";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                products.add(new Product(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("barcode"),
+                        rs.getDouble("price"),
+                        rs.getInt("quantity")
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
+    public List<Product> searchProductsByName(String name) {
+        List<Product> products = new ArrayList<>();
+        String sql = "SELECT * FROM products WHERE name LIKE ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, "%" + name + "%");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                products.add(new Product(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("barcode"),
+                        rs.getDouble("price"),
+                        rs.getInt("quantity")
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return products;
     }
 }

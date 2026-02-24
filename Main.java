@@ -1,6 +1,5 @@
-package com.pos;
 
-import com.pos.ui.POSForm;
+import ui.POSForm;
 
 import javax.swing.SwingUtilities;
 
